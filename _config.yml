@@ -23,4 +23,4 @@ repo_name: "TBD"
 repo: ucsb-cs156-s23/proj-gauchoride-s23-5pm-4
 owner: ucsb-cs156-s23
 repo_name: proj-gauchoride-s23-5pm-4
-pull_requests: []
+pull_requests: [{"author":{"id":"MDQ6VXNlcjEyNTM2MTg3","is_bot":false,"login":"ameymwalimbe","name":""},"headRefName":"ameymwalimbe-patch-1","number":12,"title":"Update README.md to use our dokku link","url":"https://github.com/ucsb-cs156-s23/proj-gauchoride-s23-5pm-4/pull/12"}]
