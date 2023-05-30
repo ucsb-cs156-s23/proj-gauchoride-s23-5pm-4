@@ -23,4 +23,4 @@ repo_name: "TBD"
 repo: ucsb-cs156-s23/proj-gauchoride-s23-5pm-4
 owner: ucsb-cs156-s23
 repo_name: proj-gauchoride-s23-5pm-4
-pull_requests: [{"author":{"id":"MDQ6VXNlcjcyMjM2OTY4","is_bot":false,"login":"mike-k999","name":""},"headRefName":"Michael-ImproveUserControllerAPIParamDocumentation","number":25,"title":"Michael improve user controller api param documentation","url":"https://github.com/ucsb-cs156-s23/proj-gauchoride-s23-5pm-4/pull/25"}]
+pull_requests: [{"author":{"id":"MDQ6VXNlcjEyNzU5Mjg3","is_bot":false,"login":"ru1nw","name":"ian"},"headRefName":"ru1nw-drivertable-frontend","number":26,"title":"driver shift table frontend","url":"https://github.com/ucsb-cs156-s23/proj-gauchoride-s23-5pm-4/pull/26"},{"author":{"id":"MDQ6VXNlcjcyMjM2OTY4","is_bot":false,"login":"mike-k999","name":""},"headRefName":"Michael-ImproveUserControllerAPIParamDocumentation","number":25,"title":"Michael improve user controller api param documentation","url":"https://github.com/ucsb-cs156-s23/proj-gauchoride-s23-5pm-4/pull/25"}]
