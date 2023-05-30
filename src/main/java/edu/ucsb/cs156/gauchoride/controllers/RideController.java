@@ -105,14 +105,14 @@ public class RideController extends ApiController {
                 .orElseThrow(() -> new EntityNotFoundException(Ride.class, id));
 
 
-        ride.setDay(ride.getDay());
-        ride.setStudent(ride.getStudent());
-        ride.setCourse(ride.getCourse());
-        ride.setTime_start(ride.getTime_start());
-        ride.setTime_stop(ride.getTime_stop());
-        ride.setBuilding(ride.getBuilding());
-        ride.setRoom(ride.getRoom());
-        ride.setPick_up(ride.getPick_up());
+        ride.setDay(incoming.getDay());
+        ride.setStudent(incoming.getStudent());
+        ride.setCourse(incoming.getCourse());
+        ride.setTime_start(incoming.getTime_start());
+        ride.setTime_stop(incoming.getTime_stop());
+        ride.setBuilding(incoming.getBuilding());
+        ride.setRoom(incoming.getRoom());
+        ride.setPick_up(incoming.getPick_up());
 
         rideRepository.save(ride);
 
