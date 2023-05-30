@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RideController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">GauchoRide</a> &gt; <a href="index.source.html" class="el_package">edu.ucsb.cs156.gauchoride.controllers</a> &gt; <span class="el_source">RideController.java</span></div><h1>RideController.java</h1><pre class="source lang-java linenums">package edu.ucsb.cs156.gauchoride.controllers;
+
+import edu.ucsb.cs156.gauchoride.entities.Ride;
+import edu.ucsb.cs156.gauchoride.errors.EntityNotFoundException;
+import edu.ucsb.cs156.gauchoride.repositories.RideRepository;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import lombok.extern.slf4j.Slf4j;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.Valid;
+
+
+@Api(description = &quot;Ride Request&quot;)
+@RequestMapping(&quot;/api/ride_request&quot;)
+@RestController
+<span class="fc" id="L28">@Slf4j</span>
+<span class="fc" id="L29">public class RideController extends ApiController {</span>
+
+    @Autowired
+    RideRepository rideRepository;
+
+    @ApiOperation(value = &quot;List all rides&quot;)
+    @PreAuthorize(&quot;hasRole('ROLE_USER')&quot;)
+    @GetMapping(&quot;/all&quot;)
+    public Iterable&lt;Ride&gt; allRides() {
+<span class="fc" id="L38">        Iterable&lt;Ride&gt; rides = rideRepository.findAll();</span>
+<span class="fc" id="L39">        return rides;</span>
+    }
+
+    @ApiOperation(value = &quot;Get a single ride&quot;)
+    @PreAuthorize(&quot;hasRole('ROLE_USER')&quot;)
+    @GetMapping(&quot;&quot;)
+    public Ride getById(
+            @ApiParam(&quot;id&quot;) @RequestParam Long id) {
+<span class="fc" id="L47">        Ride ride = rideRepository.findById(id)</span>
+<span class="fc" id="L48">                .orElseThrow(() -&gt; new EntityNotFoundException(Ride.class, id));</span>
+
+<span class="fc" id="L50">        return ride;</span>
+    }
+
+    @ApiOperation(value = &quot;Create a new ride&quot;)
+    @PreAuthorize(&quot;hasRole('ROLE_ADMIN')&quot;)
+    @PostMapping(&quot;/post&quot;)
+    public Ride postRide(
+        @ApiParam(&quot;day&quot;) @RequestParam String day,
+
+        @ApiParam(&quot;student&quot;) @RequestParam String student,
+        @ApiParam(&quot;course&quot;) @RequestParam String course,
+
+        @ApiParam(&quot;time_start&quot;) @RequestParam String time_start,
+        @ApiParam(&quot;time_stop&quot;) @RequestParam String time_stop,
+        @ApiParam(&quot;building&quot;) @RequestParam String building,
+        @ApiParam(&quot;room&quot;) @RequestParam String room,
+        @ApiParam(&quot;pick_up&quot;) @RequestParam String pick_up
+        )
+        {
+
+<span class="fc" id="L70">        Ride ride = new Ride();</span>
+<span class="fc" id="L71">        ride.setDay(day);</span>
+<span class="fc" id="L72">        ride.setStudent(student);</span>
+<span class="fc" id="L73">        ride.setCourse(course);</span>
+<span class="fc" id="L74">        ride.setTime_start(time_start);</span>
+<span class="fc" id="L75">        ride.setTime_stop(time_stop);</span>
+<span class="fc" id="L76">        ride.setBuilding(building);</span>
+<span class="fc" id="L77">        ride.setRoom(room);</span>
+<span class="fc" id="L78">        ride.setPick_up(pick_up);</span>
+
+<span class="fc" id="L80">        Ride savedRide = rideRepository.save(ride);</span>
+
+<span class="fc" id="L82">        return savedRide;</span>
+    }
+
+    @ApiOperation(value = &quot;Delete a Ride&quot;)
+    @PreAuthorize(&quot;hasRole('ROLE_ADMIN')&quot;)
+    @DeleteMapping(&quot;&quot;)
+    public Object deleteRide(
+            @ApiParam(&quot;id&quot;) @RequestParam Long id) {
+<span class="fc" id="L90">        Ride ride = rideRepository.findById(id)</span>
+<span class="fc" id="L91">                .orElseThrow(() -&gt; new EntityNotFoundException(Ride.class, id));</span>
+
+<span class="fc" id="L93">        rideRepository.delete(ride);</span>
+<span class="fc" id="L94">        return genericMessage(&quot;Ride with id %s deleted&quot;.formatted(id));</span>
+    }
+
+    @ApiOperation(value = &quot;Update a single ride&quot;)
+    @PreAuthorize(&quot;hasRole('ROLE_ADMIN')&quot;)
+    @PutMapping(&quot;&quot;)
+    public Ride updateRide(
+            @ApiParam(&quot;id&quot;) @RequestParam Long id,
+            @RequestBody @Valid Ride incoming) {
+
+<span class="fc" id="L104">        Ride ride = rideRepository.findById(id)</span>
+<span class="fc" id="L105">                .orElseThrow(() -&gt; new EntityNotFoundException(Ride.class, id));</span>
+
+
+<span class="fc" id="L108">        ride.setDay(incoming.getDay());</span>
+<span class="fc" id="L109">        ride.setStudent(incoming.getStudent());</span>
+<span class="fc" id="L110">        ride.setCourse(incoming.getCourse());</span>
+<span class="fc" id="L111">        ride.setTime_start(incoming.getTime_start());</span>
+<span class="fc" id="L112">        ride.setTime_stop(incoming.getTime_stop());</span>
+<span class="fc" id="L113">        ride.setBuilding(incoming.getBuilding());</span>
+<span class="fc" id="L114">        ride.setRoom(incoming.getRoom());</span>
+<span class="fc" id="L115">        ride.setPick_up(incoming.getPick_up());</span>
+
+<span class="fc" id="L117">        rideRepository.save(ride);</span>
+
+<span class="fc" id="L119">        return ride;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
