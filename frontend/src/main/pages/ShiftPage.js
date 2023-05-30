@@ -1,9 +1,9 @@
 import React from "react";
 import BasicLayout from "main/layouts/BasicLayout/BasicLayout";
-import UsersTable from "main/components/Users/UsersTable"
+import ShiftTable from "main/components/Shift/ShiftTable"
 
 import { useBackend } from "main/utils/useBackend";
-const AdminUsersPage = () => {
+const ShiftPage = () => {
 
     const { data: users, error: _error, status: _status } =
         useBackend(
@@ -16,10 +16,10 @@ const AdminUsersPage = () => {
 
     return (
         <BasicLayout>
-            <h2>Users</h2>
-            <UsersTable users={users} />
+            <h2>Shift</h2>
+            <ShiftTable users={users} />
         </BasicLayout>
     );
 };
 
-export default AdminUsersPage;
+export default ShiftPage;
