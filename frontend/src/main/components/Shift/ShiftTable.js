@@ -4,7 +4,7 @@ import { useBackendMutation } from "main/utils/useBackend";
 
 
 
-export default function ShiftTable({ users}) {
+export default function ShiftTable({ shift }) {
 
     function cellToAxiosParamsToggleAdmin(cell) {
         return {
@@ -34,39 +34,33 @@ export default function ShiftTable({ users}) {
             accessor: 'id', // accessor is the "key" in the data
         },
         {
-            Header: 'First Name',
-            accessor: 'givenName',
+            Header: 'day',
+            accessor: 'day',
         },
         {
-            Header: 'Last Name',
-            accessor: 'familyName',
+            Header: 'shift',
+            accessor: 'shift',
         },
         {
-            Header: 'Email',
-            accessor: 'email',
+            Header: 'driver',
+            accessor: 'driver'
         },
         {
-            Header: 'Admin',
-            id: 'admin',
-            accessor: (row, _rowIndex) => String(row.admin) // hack needed for boolean values to show up
-        },
-        {
-            Header: 'Driver',
-            id: 'driver',
-            accessor: (row, _rowIndex) => String(row.driver) // hack needed for boolean values to show up
+            Header: 'driver backup',
+            accessor: 'driverBackup',
         }
     ];
 
     const buttonColumn = [
         ...columns,
-        ButtonColumn("toggle-admin", "primary", toggleAdminCallback, "UsersTable"),
+        ButtonColumn("toggle-admin", "primary", toggleAdminCallback, "ShiftTable"),
     ]
 
     //const columnsToDisplay = showButtons ? buttonColumn : columns;
 
     return <OurTable
-        data={users}
+        data={shift}
         columns={buttonColumn}
-        testid={"UsersTable"}
+        testid={"ShiftTable"}
     />;
 };

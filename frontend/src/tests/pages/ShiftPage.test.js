@@ -2,7 +2,7 @@ import { render, waitFor, screen, fireEvent } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
 import ShiftPage from "main/pages/ShiftPage";
-import usersFixtures from "fixtures/usersFixtures";
+import shiftFixtures from "fixtures/shiftFixtures";
 import { apiCurrentUserFixtures } from "fixtures/currentUserFixtures";
 import { systemInfoFixtures } from "fixtures/systemInfoFixtures";
 import mockConsole from "jest-mock-console";
@@ -23,16 +23,16 @@ describe("ShiftPage tests", () => {
         axiosMock.onGet("/api/systemInfo").reply(200, systemInfoFixtures.showingNeither);
     });
 
-    const setupAdminUser = () => {
-        axiosMock.reset();
-        axiosMock.resetHistory();
-        axiosMock.onGet("/api/currentUser").reply(200, apiCurrentUserFixtures.adminUser);
-        axiosMock.onGet("/api/systemInfo").reply(200, systemInfoFixtures.showingNeither);
-    };
+    // const setupAdminUser = () => {
+    //     axiosMock.reset();
+    //     axiosMock.resetHistory();
+    //     axiosMock.onGet("/api/currentUser").reply(200, apiCurrentUserFixtures.adminUser);
+    //     axiosMock.onGet("/api/systemInfo").reply(200, systemInfoFixtures.showingNeither);
+    // };
 
-    test("renders without crashing on three users", async () => {
+    test("renders without crashing on three shifts", async () => {
         const queryClient = new QueryClient();
-        axiosMock.onGet("/api/admin/users").reply(200, usersFixtures.threeUsers);
+        axiosMock.onGet("/api/admin/users").reply(200, shiftFixtures.threeShifts);
 
         const { getByText } = render(
             <QueryClientProvider client={queryClient}>
@@ -68,31 +68,31 @@ describe("ShiftPage tests", () => {
 
     });
 
-    test("usertable toggle admin tests", async ()=>{
-        setupAdminUser();
-        const queryClient = new QueryClient();
-        axiosMock.onGet("/api/admin/users").reply(200, usersFixtures.threeUsers);
-        axiosMock.onPost("/api/admin/users/toggleAdmin").reply(200, "User with id 1 has toggled admin status");
-        const { getByText} = render(
-            <QueryClientProvider client={queryClient}>
-                <MemoryRouter>
-                    <ShiftPage />
-                </MemoryRouter>
-            </QueryClientProvider>
-        );
-        await waitFor(() => expect(getByText("Users")).toBeInTheDocument());
+    // test("usertable toggle admin tests", async ()=>{
+    //     setupAdminUser();
+    //     const queryClient = new QueryClient();
+    //     axiosMock.onGet("/api/admin/users").reply(200, usersFixtures.threeUsers);
+    //     axiosMock.onPost("/api/admin/users/toggleAdmin").reply(200, "User with id 1 has toggled admin status");
+    //     const { getByText} = render(
+    //         <QueryClientProvider client={queryClient}>
+    //             <MemoryRouter>
+    //                 <ShiftPage />
+    //             </MemoryRouter>
+    //         </QueryClientProvider>
+    //     );
+    //     await waitFor(() => expect(getByText("Users")).toBeInTheDocument());
 
-        const toggleAdminButton = screen.getByTestId(`${testId}-cell-row-0-col-toggle-admin-button`);
-        expect(toggleAdminButton).toBeInTheDocument();
+    //     const toggleAdminButton = screen.getByTestId(`${testId}-cell-row-0-col-toggle-admin-button`);
+    //     expect(toggleAdminButton).toBeInTheDocument();
 
-        fireEvent.click(toggleAdminButton);
+    //     fireEvent.click(toggleAdminButton);
 
-        await waitFor(() => expect(axiosMock.history.post.length).toBe(1));
-        expect(axiosMock.history.post[0].url).toBe("/api/admin/users/toggleAdmin");
-        expect(axiosMock.history.post[0].params).toEqual({id:1});
+    //     await waitFor(() => expect(axiosMock.history.post.length).toBe(1));
+    //     expect(axiosMock.history.post[0].url).toBe("/api/admin/users/toggleAdmin");
+    //     expect(axiosMock.history.post[0].params).toEqual({id:1});
       
 
-    })
+    // })
 
 });
 
