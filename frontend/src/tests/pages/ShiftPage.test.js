@@ -42,7 +42,7 @@ describe("ShiftPage tests", () => {
             </QueryClientProvider>
         );
 
-        await waitFor(() => expect(getByText("Users")).toBeInTheDocument());
+        await waitFor(() => expect(getByText("Shift")).toBeInTheDocument());
 
 
     });
