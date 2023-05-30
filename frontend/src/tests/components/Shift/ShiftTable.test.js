@@ -1,5 +1,5 @@
 import { render } from "@testing-library/react";
-import shiftFixtures from "fixtures/shiftFixtures";
+import usersFixtures from "fixtures/usersFixtures";
 import ShiftTable from "main/components/Shift/ShiftTable"
 import { QueryClient, QueryClientProvider } from "react-query";
 
