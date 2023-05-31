@@ -6,7 +6,6 @@ import edu.ucsb.cs156.gauchoride.repositories.RideRepository;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -25,8 +24,8 @@ import javax.validation.Valid;
 @Api(description = &quot;Ride Request&quot;)
 @RequestMapping(&quot;/api/ride_request&quot;)
 @RestController
-<span class="fc" id="L28">@Slf4j</span>
-<span class="fc" id="L29">public class RideController extends ApiController {</span>
+
+<span class="fc" id="L28">public class RideController extends ApiController {</span>
 
     @Autowired
     RideRepository rideRepository;
@@ -35,8 +34,8 @@ import javax.validation.Valid;
     @PreAuthorize(&quot;hasRole('ROLE_USER')&quot;)
     @GetMapping(&quot;/all&quot;)
     public Iterable&lt;Ride&gt; allRides() {
-<span class="fc" id="L38">        Iterable&lt;Ride&gt; rides = rideRepository.findAll();</span>
-<span class="fc" id="L39">        return rides;</span>
+<span class="fc" id="L37">        Iterable&lt;Ride&gt; rides = rideRepository.findAll();</span>
+<span class="fc" id="L38">        return rides;</span>
     }
 
     @ApiOperation(value = &quot;Get a single ride&quot;)
@@ -44,10 +43,10 @@ import javax.validation.Valid;
     @GetMapping(&quot;&quot;)
     public Ride getById(
             @ApiParam(&quot;id&quot;) @RequestParam Long id) {
-<span class="fc" id="L47">        Ride ride = rideRepository.findById(id)</span>
-<span class="fc" id="L48">                .orElseThrow(() -&gt; new EntityNotFoundException(Ride.class, id));</span>
+<span class="fc" id="L46">        Ride ride = rideRepository.findById(id)</span>
+<span class="fc" id="L47">                .orElseThrow(() -&gt; new EntityNotFoundException(Ride.class, id));</span>
 
-<span class="fc" id="L50">        return ride;</span>
+<span class="fc" id="L49">        return ride;</span>
     }
 
     @ApiOperation(value = &quot;Create a new ride&quot;)
@@ -59,27 +58,27 @@ import javax.validation.Valid;
         @ApiParam(&quot;student&quot;) @RequestParam String student,
         @ApiParam(&quot;course&quot;) @RequestParam String course,
 
-        @ApiParam(&quot;time_start&quot;) @RequestParam String time_start,
-        @ApiParam(&quot;time_stop&quot;) @RequestParam String time_stop,
-        @ApiParam(&quot;building&quot;) @RequestParam String building,
+        @ApiParam(&quot;start&quot;) @RequestParam String start,
+        @ApiParam(&quot;end&quot;) @RequestParam String end,
+        @ApiParam(&quot;dropoff&quot;) @RequestParam String dropoff,
         @ApiParam(&quot;room&quot;) @RequestParam String room,
-        @ApiParam(&quot;pick_up&quot;) @RequestParam String pick_up
+        @ApiParam(&quot;pickup&quot;) @RequestParam String pickup
         )
         {
 
-<span class="fc" id="L70">        Ride ride = new Ride();</span>
-<span class="fc" id="L71">        ride.setDay(day);</span>
-<span class="fc" id="L72">        ride.setStudent(student);</span>
-<span class="fc" id="L73">        ride.setCourse(course);</span>
-<span class="fc" id="L74">        ride.setTime_start(time_start);</span>
-<span class="fc" id="L75">        ride.setTime_stop(time_stop);</span>
-<span class="fc" id="L76">        ride.setBuilding(building);</span>
-<span class="fc" id="L77">        ride.setRoom(room);</span>
-<span class="fc" id="L78">        ride.setPick_up(pick_up);</span>
+<span class="fc" id="L69">        Ride ride = new Ride();</span>
+<span class="fc" id="L70">        ride.setDay(day);</span>
+<span class="fc" id="L71">        ride.setStudent(student);</span>
+<span class="fc" id="L72">        ride.setCourse(course);</span>
+<span class="fc" id="L73">        ride.setStart(start);</span>
+<span class="fc" id="L74">        ride.setEnd(end);</span>
+<span class="fc" id="L75">        ride.setDropoff(dropoff);</span>
+<span class="fc" id="L76">        ride.setRoom(room);</span>
+<span class="fc" id="L77">        ride.setPickup(pickup);</span>
 
-<span class="fc" id="L80">        Ride savedRide = rideRepository.save(ride);</span>
+<span class="fc" id="L79">        Ride savedRide = rideRepository.save(ride);</span>
 
-<span class="fc" id="L82">        return savedRide;</span>
+<span class="fc" id="L81">        return savedRide;</span>
     }
 
     @ApiOperation(value = &quot;Delete a Ride&quot;)
@@ -87,11 +86,11 @@ import javax.validation.Valid;
     @DeleteMapping(&quot;&quot;)
     public Object deleteRide(
             @ApiParam(&quot;id&quot;) @RequestParam Long id) {
-<span class="fc" id="L90">        Ride ride = rideRepository.findById(id)</span>
-<span class="fc" id="L91">                .orElseThrow(() -&gt; new EntityNotFoundException(Ride.class, id));</span>
+<span class="fc" id="L89">        Ride ride = rideRepository.findById(id)</span>
+<span class="fc" id="L90">                .orElseThrow(() -&gt; new EntityNotFoundException(Ride.class, id));</span>
 
-<span class="fc" id="L93">        rideRepository.delete(ride);</span>
-<span class="fc" id="L94">        return genericMessage(&quot;Ride with id %s deleted&quot;.formatted(id));</span>
+<span class="fc" id="L92">        rideRepository.delete(ride);</span>
+<span class="fc" id="L93">        return genericMessage(&quot;Ride with id %s deleted&quot;.formatted(id));</span>
     }
 
     @ApiOperation(value = &quot;Update a single ride&quot;)
@@ -101,22 +100,22 @@ import javax.validation.Valid;
             @ApiParam(&quot;id&quot;) @RequestParam Long id,
             @RequestBody @Valid Ride incoming) {
 
-<span class="fc" id="L104">        Ride ride = rideRepository.findById(id)</span>
-<span class="fc" id="L105">                .orElseThrow(() -&gt; new EntityNotFoundException(Ride.class, id));</span>
+<span class="fc" id="L103">        Ride ride = rideRepository.findById(id)</span>
+<span class="fc" id="L104">                .orElseThrow(() -&gt; new EntityNotFoundException(Ride.class, id));</span>
 
 
-<span class="fc" id="L108">        ride.setDay(incoming.getDay());</span>
-<span class="fc" id="L109">        ride.setStudent(incoming.getStudent());</span>
-<span class="fc" id="L110">        ride.setCourse(incoming.getCourse());</span>
-<span class="fc" id="L111">        ride.setTime_start(incoming.getTime_start());</span>
-<span class="fc" id="L112">        ride.setTime_stop(incoming.getTime_stop());</span>
-<span class="fc" id="L113">        ride.setBuilding(incoming.getBuilding());</span>
-<span class="fc" id="L114">        ride.setRoom(incoming.getRoom());</span>
-<span class="fc" id="L115">        ride.setPick_up(incoming.getPick_up());</span>
+<span class="fc" id="L107">        ride.setDay(incoming.getDay());</span>
+<span class="fc" id="L108">        ride.setStudent(incoming.getStudent());</span>
+<span class="fc" id="L109">        ride.setCourse(incoming.getCourse());</span>
+<span class="fc" id="L110">        ride.setStart(incoming.getStart());</span>
+<span class="fc" id="L111">        ride.setEnd(incoming.getEnd());</span>
+<span class="fc" id="L112">        ride.setDropoff(incoming.getDropoff());</span>
+<span class="fc" id="L113">        ride.setRoom(incoming.getRoom());</span>
+<span class="fc" id="L114">        ride.setPickup(incoming.getPickup());</span>
 
-<span class="fc" id="L117">        rideRepository.save(ride);</span>
+<span class="fc" id="L116">        rideRepository.save(ride);</span>
 
-<span class="fc" id="L119">        return ride;</span>
+<span class="fc" id="L118">        return ride;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
