@@ -17,21 +17,22 @@ import lombok.Builder;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Entity(name = "transport")
+@Entity(name = "ride")
 public class Ride {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
+  private String student;
 
 //   @ApiModelProperty(allowableValues = "Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday")
   private String day;
+  
+  private String start;
+  private String end;
 
-  private String student;  
-  private String course;
-
-  private String time_start;
-  private String time_stop;
-  private String building;
+  private String pickup;
+  private String dropoff;
+  
   private String room;
-  private String pick_up;
+  private String course;
 }

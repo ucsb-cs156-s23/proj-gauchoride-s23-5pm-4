@@ -91,11 +91,11 @@ public class RideControllerTests extends ControllerTestCase {
                                 .day("Monday")
                                 .student("CGaucho")
                                 .course("CMPSC 156")
-                                .time_start("2:00 PM")
-                                .time_stop("3:15 PM")
-                                .building("South Hall")
+                                .start("2:00PM")
+                                .end("3:15PM")
+                                .dropoff("South Hall")
                                 .room("1431")
-                                .pick_up("Phelps Hall")
+                                .pickup("Phelps Hall")
                                 .build();
 
                 when(rideRepository.findById(eq(7L))).thenReturn(Optional.of(ride));
@@ -140,22 +140,22 @@ public class RideControllerTests extends ControllerTestCase {
                                 .day("Monday")
                                 .student("CGaucho")
                                 .course("CMPSC 156")
-                                .time_start("2:00 PM")
-                                .time_stop("3:15 PM")
-                                .building("South Hall")
+                                .start("2:00PM")
+                                .end("3:15PM")
+                                .dropoff("South Hall")
                                 .room("1431")
-                                .pick_up("Phelps Hall")
+                                .pickup("Phelps Hall")
                                 .build();
 
                 Ride ride2 = Ride.builder()
                                 .day("Thursday")
                                 .student("DGaucho")
                                 .course("MATH 118C")
-                                .time_start("12:30 PM")
-                                .time_stop("1:45 PM")
-                                .building("Phelps Hall")
+                                .start("12:30PM")
+                                .end("1:45PM")
+                                .dropoff("Phelps Hall")
                                 .room("3505")
-                                .pick_up("UCen")
+                                .pickup("UCen")
                                 .build();
 
                 ArrayList<Ride> expectedRide = new ArrayList<>();
@@ -184,16 +184,16 @@ public class RideControllerTests extends ControllerTestCase {
                         .day("Monday")
                         .student("CGaucho")
                         .course("CMPSC 156")
-                        .time_start("2:00 PM")
-                        .time_stop("3:15 PM")
-                        .building("South Hall")
+                        .start("2:00PM")
+                        .end("3:15PM")
+                        .dropoff("South Hall")
                         .room("1431")
-                        .pick_up("Phelps Hall")
+                        .pickup("Phelps Hall")
                         .build();
 
                 when(rideRepository.save(eq(ride1))).thenReturn(ride1);
 
-                String postRequesString = "day=Monday&student=CGaucho&course=CMPSC 156&time_start=2:00 PM&time_stop=3:15 PM&building=South Hall&room=1431&pick_up=Phelps Hall";
+                String postRequesString = "day=Monday&student=CGaucho&course=CMPSC 156&start=2:00PM&end=3:15PM&dropoff=South Hall&room=1431&pickup=Phelps Hall";
 
                 // act
                 MvcResult response = mockMvc.perform(
@@ -217,11 +217,11 @@ public class RideControllerTests extends ControllerTestCase {
                         .day("Monday")
                         .student("CGaucho")
                         .course("CMPSC 156")
-                        .time_start("2:00 PM")
-                        .time_stop("3:15 PM")
-                        .building("South Hall")
+                        .start("2:00PM")
+                        .end("3:15PM")
+                        .dropoff("South Hall")
                         .room("1431")
-                        .pick_up("Phelps Hall")
+                        .pickup("Phelps Hall")
                         .build();
 
                 when(rideRepository.findById(eq(15L))).thenReturn(Optional.of(ride1));
@@ -269,22 +269,22 @@ public class RideControllerTests extends ControllerTestCase {
                                 .day("Monday")
                                 .student("CGaucho")
                                 .course("CMPSC 156")
-                                .time_start("2:00 PM")
-                                .time_stop("3:15 PM")
-                                .building("South Hall")
+                                .start("2:00PM")
+                                .end("3:15PM")
+                                .dropoff("South Hall")
                                 .room("1431")
-                                .pick_up("Phelps Hall")
+                                .pickup("Phelps Hall")
                                 .build();
 
                 Ride ride_edited = Ride.builder()
                                 .day("Thursday")
                                 .student("DGaucho")
                                 .course("MATH 118C")
-                                .time_start("12:30 PM")
-                                .time_stop("1:45 PM")
-                                .building("Phelps Hall")
+                                .start("12:30PM")
+                                .end("1:45PM")
+                                .dropoff("Phelps Hall")
                                 .room("3505")
-                                .pick_up("UCen")
+                                .pickup("UCen")
                                 .build();
 
                 String requestBody = mapper.writeValueAsString(ride_edited);
@@ -316,11 +316,11 @@ public class RideControllerTests extends ControllerTestCase {
                                 .day("Thursday")
                                 .student("DGaucho")
                                 .course("MATH 118C")
-                                .time_start("12:30 PM")
-                                .time_stop("1:45 PM")
-                                .building("Phelps Hall")
+                                .start("12:30PM")
+                                .end("1:45PM")
+                                .dropoff("Phelps Hall")
                                 .room("3505")
-                                .pick_up("UCen")
+                                .pickup("UCen")
                                 .build();
 
 

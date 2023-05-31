@@ -6,7 +6,6 @@ import edu.ucsb.cs156.gauchoride.repositories.RideRepository;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -25,7 +24,7 @@ import javax.validation.Valid;
 @Api(description = "Ride Request")
 @RequestMapping("/api/ride_request")
 @RestController
-@Slf4j
+
 public class RideController extends ApiController {
 
     @Autowired
@@ -59,11 +58,11 @@ public class RideController extends ApiController {
         @ApiParam("student") @RequestParam String student,
         @ApiParam("course") @RequestParam String course,
 
-        @ApiParam("time_start") @RequestParam String time_start,
-        @ApiParam("time_stop") @RequestParam String time_stop,
-        @ApiParam("building") @RequestParam String building,
+        @ApiParam("start") @RequestParam String start,
+        @ApiParam("end") @RequestParam String end,
+        @ApiParam("dropoff") @RequestParam String dropoff,
         @ApiParam("room") @RequestParam String room,
-        @ApiParam("pick_up") @RequestParam String pick_up
+        @ApiParam("pickup") @RequestParam String pickup
         )
         {
 
@@ -71,11 +70,11 @@ public class RideController extends ApiController {
         ride.setDay(day);
         ride.setStudent(student);
         ride.setCourse(course);
-        ride.setTime_start(time_start);
-        ride.setTime_stop(time_stop);
-        ride.setBuilding(building);
+        ride.setStart(start);
+        ride.setEnd(end);
+        ride.setDropoff(dropoff);
         ride.setRoom(room);
-        ride.setPick_up(pick_up);
+        ride.setPickup(pickup);
 
         Ride savedRide = rideRepository.save(ride);
 
@@ -108,11 +107,11 @@ public class RideController extends ApiController {
         ride.setDay(incoming.getDay());
         ride.setStudent(incoming.getStudent());
         ride.setCourse(incoming.getCourse());
-        ride.setTime_start(incoming.getTime_start());
-        ride.setTime_stop(incoming.getTime_stop());
-        ride.setBuilding(incoming.getBuilding());
+        ride.setStart(incoming.getStart());
+        ride.setEnd(incoming.getEnd());
+        ride.setDropoff(incoming.getDropoff());
         ride.setRoom(incoming.getRoom());
-        ride.setPick_up(incoming.getPick_up());
+        ride.setPickup(incoming.getPickup());
 
         rideRepository.save(ride);
 
