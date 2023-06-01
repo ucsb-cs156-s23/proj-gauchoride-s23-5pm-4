@@ -14,7 +14,7 @@ describe("ShiftPage tests", () => {
 
     const axiosMock = new AxiosMockAdapter(axios);
 
-    const testId = "UsersTable";
+    const testId = "ShiftTable";
 
     beforeEach( () => {
         axiosMock.reset();
@@ -68,7 +68,7 @@ describe("ShiftPage tests", () => {
 
     });
 
-    test("usertable toggle admin tests", async ()=>{
+    test("shifttable toggle admin tests (dont need this when table is fixed)", async ()=>{
         setupAdminUser();
         const queryClient = new QueryClient();
         axiosMock.onGet("/api/admin/users").reply(200, usersFixtures.threeUsers);
