@@ -16,8 +16,9 @@ const ShiftPage = () => {
 
     return (
         <BasicLayout>
-            <h2>Shift</h2>
-            <ShiftTable users={users} />
+            {/* <h2>Shift</h2> */}
+            <h2>Users</h2>
+            <ShiftTable shift={users} />
         </BasicLayout>
     );
 };

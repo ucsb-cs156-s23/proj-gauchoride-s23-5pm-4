@@ -48,6 +48,16 @@ export default function ShiftTable({ shift }) {
         {
             Header: 'driver backup',
             accessor: 'driverBackup',
+        },
+        {
+            Header: 'Admin',
+            id: 'admin',
+            accessor: (row, _rowIndex) => String(row.admin) // hack needed for boolean values to show up
+        },
+        {
+            Header: 'Driver',
+            id: 'driver',
+            accessor: (row, _rowIndex) => String(row.driver) // hack needed for boolean values to show up
         }
     ];
 
