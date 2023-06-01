@@ -23,15 +23,15 @@ describe("ShiftTable tests", () => {
         );
     });
 
-    test("Has the expected colum headers and content", () => {
+    test("Has the expected column headers and content", () => {
         const { getByText, getByTestId } = render(
             <QueryClientProvider client={queryClient}>
                 <ShiftTable shift={shiftFixtures.threeShifts}/>
             </QueryClientProvider>
         );
     
-        const expectedHeaders = ["id", "First Name", "Last Name", "Email", "Admin", "Driver"];
-        const expectedFields = ["id", "givenName", "familyName", "email", "admin", "driver"];
+        const expectedHeaders = ["id", "day", "shift", "driver", "driver backup", "Admin"];
+        const expectedFields = ["id", "day", "shift", "driver", "driverBackup", "admin"];
         const testId = "ShiftTable";
 
         expectedHeaders.forEach( (headerText)=> {
@@ -45,11 +45,11 @@ describe("ShiftTable tests", () => {
         });
 
         expect(getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("1");
-        expect(getByTestId(`${testId}-cell-row-0-col-admin`)).toHaveTextContent("true");
-        expect(getByTestId(`${testId}-cell-row-0-col-driver`)).toHaveTextContent("false");
+        expect(getByTestId(`${testId}-cell-row-0-col-day`)).toHaveTextContent("Monday");
+        expect(getByTestId(`${testId}-cell-row-0-col-driver`)).toHaveTextContent("Adam");
         expect(getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent("2");
-        expect(getByTestId(`${testId}-cell-row-1-col-admin`)).toHaveTextContent("false");
-        expect(getByTestId(`${testId}-cell-row-1-col-driver`)).toHaveTextContent("true");
+        expect(getByTestId(`${testId}-cell-row-1-col-day`)).toHaveTextContent("Tuesday");
+        expect(getByTestId(`${testId}-cell-row-1-col-driver`)).toHaveTextContent("Bob");
 
       });
 });
