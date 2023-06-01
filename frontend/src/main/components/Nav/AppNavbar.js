@@ -3,6 +3,14 @@ import { Link } from "react-router-dom";
 import { hasRole } from "main/utils/currentUser";
 import AppNavbarLocalhost from "main/components/Nav/AppNavbarLocalhost"
 
+function isParticipant(currentUser) {
+  return (
+    hasRole(currentUser, "ROLE_ADMIN")
+    || hasRole(currentUser, "ROLE_DRIVER")
+    || hasRole(currentUser, "ROLE_RIDER")
+  );
+}
+
 export default function AppNavbar({ currentUser, systemInfo, doLogout, currentUrl = window.location.href }) {
   return (
     <>
@@ -48,7 +56,7 @@ export default function AppNavbar({ currentUser, systemInfo, doLogout, currentUr
                 )
               }
               {
-                hasRole(currentUser, "ROLE_MEMBER") && (
+                isParticipant(currentUser) && (
                   <NavDropdown title="Shift" id="appnavbar-shift-dropdown" data-testid="appnavbar-shift-dropdown" >
                     <NavDropdown.Item as={Link} to="/shift/list">Driver shift table</NavDropdown.Item>
                   </NavDropdown>
