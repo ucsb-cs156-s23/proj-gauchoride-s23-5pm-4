@@ -4,15 +4,6 @@ import { hasRole } from "main/utils/currentUser";
 import headerImg from "../../../assets/header-logo-240.png"
 import AppNavbarLocalhost from "main/components/Nav/AppNavbarLocalhost"
 
-function isParticipant(currentUser) {
-  return (
-    hasRole(currentUser, "ROLE_ADMIN")
-    // will uncomment this part when the corresponding roles are implemented
-    // || hasRole(currentUser, "ROLE_DRIVER")
-    // || hasRole(currentUser, "ROLE_RIDER")
-  );
-}
-
 export default function AppNavbar({ currentUser, systemInfo, doLogout, currentUrl = window.location.href }) {
   const styles = {
     navbar: {
@@ -65,7 +56,21 @@ export default function AppNavbar({ currentUser, systemInfo, doLogout, currentUr
                 )
               }
               {
-                isParticipant(currentUser) && (
+                hasRole(currentUser, "ROLE_ADMIN") && (
+                  <NavDropdown title="Shift" id="appnavbar-shift-dropdown" data-testid="appnavbar-shift-dropdown" >
+                    <NavDropdown.Item as={Link} to="/shift/list">Driver shift table</NavDropdown.Item>
+                  </NavDropdown>
+                )
+              }
+              {
+                hasRole(currentUser, "ROLE_DRIVER") && (
+                  <NavDropdown title="Shift" id="appnavbar-shift-dropdown" data-testid="appnavbar-shift-dropdown" >
+                    <NavDropdown.Item as={Link} to="/shift/list">Driver shift table</NavDropdown.Item>
+                  </NavDropdown>
+                )
+              }
+              {
+                hasRole(currentUser, "ROLE_RIDER") && (
                   <NavDropdown title="Shift" id="appnavbar-shift-dropdown" data-testid="appnavbar-shift-dropdown" >
                     <NavDropdown.Item as={Link} to="/shift/list">Driver shift table</NavDropdown.Item>
                   </NavDropdown>

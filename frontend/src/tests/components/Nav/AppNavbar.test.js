@@ -64,7 +64,7 @@ describe("AppNavbar tests", () => {
         expect(swaggerMenu).toBeInTheDocument();        
     });
 
-    test("renders shift table links correctly", async () => {
+    test("renders shift table links correctly for admin user", async () => {
 
         const currentUser = currentUserFixtures.adminUser;
         const doLogin = jest.fn();
@@ -74,6 +74,42 @@ describe("AppNavbar tests", () => {
                 <MemoryRouter>
                     <AppNavbar currentUser={currentUser} doLogin={doLogin} />
                     </MemoryRouter>
+            </QueryClientProvider>
+        );
+        
+        await waitFor(() => expect(getByText("Welcome, phtcon@ucsb.edu")).toBeInTheDocument());
+        const shiftMenu = getByTestId("appnavbar-shift-dropdown");
+        expect(shiftMenu).toBeInTheDocument();        
+    });
+
+    test("renders shift table links correctly for driver", async () => {
+
+        const currentUser = currentUserFixtures.driver;
+        const doLogin = jest.fn();
+
+        const { getByText , getByTestId } = render(
+            <QueryClientProvider client={queryClient}>
+                <MemoryRouter>
+                    <AppNavbar currentUser={currentUser} doLogin={doLogin} />
+                </MemoryRouter>
+            </QueryClientProvider>
+        );
+        
+        await waitFor(() => expect(getByText("Welcome, phtcon@ucsb.edu")).toBeInTheDocument());
+        const shiftMenu = getByTestId("appnavbar-shift-dropdown");
+        expect(shiftMenu).toBeInTheDocument();        
+    });
+
+    test("renders shift table links correctly for rider", async () => {
+
+        const currentUser = currentUserFixtures.rider;
+        const doLogin = jest.fn();
+
+        const { getByText , getByTestId } = render(
+            <QueryClientProvider client={queryClient}>
+                <MemoryRouter>
+                    <AppNavbar currentUser={currentUser} doLogin={doLogin} />
+                </MemoryRouter>
             </QueryClientProvider>
         );
         
