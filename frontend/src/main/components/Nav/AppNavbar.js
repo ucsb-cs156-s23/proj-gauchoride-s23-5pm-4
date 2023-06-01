@@ -7,8 +7,9 @@ import AppNavbarLocalhost from "main/components/Nav/AppNavbarLocalhost"
 function isParticipant(currentUser) {
   return (
     hasRole(currentUser, "ROLE_ADMIN")
-    || hasRole(currentUser, "ROLE_DRIVER")
-    || hasRole(currentUser, "ROLE_RIDER")
+    // will uncomment this part when the corresponding roles are implemented
+    // || hasRole(currentUser, "ROLE_DRIVER")
+    // || hasRole(currentUser, "ROLE_RIDER")
   );
 }
 
