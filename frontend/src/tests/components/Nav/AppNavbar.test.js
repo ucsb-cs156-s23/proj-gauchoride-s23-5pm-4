@@ -1,4 +1,4 @@
-import { render, waitFor} from "@testing-library/react";
+import { screen, render, waitFor} from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
 import { currentUserFixtures } from "fixtures/currentUserFixtures";
@@ -62,6 +62,24 @@ describe("AppNavbar tests", () => {
         await waitFor(() => expect(getByText("H2Console")).toBeInTheDocument());
         const swaggerMenu = getByText("Swagger");
         expect(swaggerMenu).toBeInTheDocument();        
+    });
+
+    // test taken from https://github.com/ucsb-cs156/proj-courses repo
+    test("renders image correctly", async () => {
+        const currentUser = currentUserFixtures.adminUser;
+        const systemInfo = systemInfoFixtures.showingBoth;
+
+        const doLogin = jest.fn();
+
+        render(
+            <QueryClientProvider client={queryClient}>
+                <MemoryRouter>
+                    <AppNavbar currentUser={currentUser} systemInfo={systemInfo} doLogin={doLogin} />
+                </MemoryRouter>
+            </QueryClientProvider>
+        );
+
+        expect(await screen.findByTestId("AppNavbarImage")).toHaveAttribute('style', 'width: 80px; height: 80px; margin-right: 10px;');     
     });
 
 
@@ -149,7 +167,40 @@ describe("AppNavbar tests", () => {
     });
 
 
-   
+    test("Navbar has UCSB-blue background color, regular user", () => {
+        
+        const currentUser = currentUserFixtures.userOnly;
+        const doLogin = jest.fn();
+
+        const { getByTestId } = render(
+            <QueryClientProvider client={queryClient}>
+                <MemoryRouter>
+                    <AppNavbar currentUser={currentUser} doLogin={doLogin} />
+                </MemoryRouter>
+            </QueryClientProvider>
+        );
+       
+        const navbar = getByTestId("AppNavbar");
+        expect(navbar).toHaveStyle("background-color: #003660");
+      });
+
+      test("Navbar has UCSB-blue background color, admin user", () => {
+        
+        const currentUser = currentUserFixtures.adminUser;
+        const doLogin = jest.fn();
+
+        const { getByTestId } = render(
+            <QueryClientProvider client={queryClient}>
+                <MemoryRouter>
+                    <AppNavbar currentUser={currentUser} doLogin={doLogin} />
+                </MemoryRouter>
+            </QueryClientProvider>
+        );
+       
+        const navbar = getByTestId("AppNavbar");
+        expect(navbar).toHaveStyle("background-color: #003660");
+      });
+
 });
 
 
