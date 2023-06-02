@@ -42,7 +42,7 @@ describe("ShiftPage tests", () => {
             </QueryClientProvider>
         );
 
-        await waitFor(() => expect(getByText("Users")).toBeInTheDocument());
+        await waitFor(() => expect(getByText("Shift")).toBeInTheDocument());
 
 
     });
@@ -80,7 +80,7 @@ describe("ShiftPage tests", () => {
                 </MemoryRouter>
             </QueryClientProvider>
         );
-        await waitFor(() => expect(getByText("Users")).toBeInTheDocument());
+        await waitFor(() => expect(getByText("Shift")).toBeInTheDocument());
 
         const toggleAdminButton = screen.getByTestId(`${testId}-cell-row-0-col-toggle-admin-button`);
         expect(toggleAdminButton).toBeInTheDocument();
