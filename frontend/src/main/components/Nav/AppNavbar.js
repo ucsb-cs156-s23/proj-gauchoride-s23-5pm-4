@@ -56,21 +56,11 @@ export default function AppNavbar({ currentUser, systemInfo, doLogout, currentUr
                 )
               }
               {
-                hasRole(currentUser, "ROLE_ADMIN") && (
-                  <NavDropdown title="Shift" id="appnavbar-shift-dropdown" data-testid="appnavbar-shift-dropdown" >
-                    <NavDropdown.Item as={Link} to="/shift/list">Driver shift table</NavDropdown.Item>
-                  </NavDropdown>
-                )
-              }
-              {
-                hasRole(currentUser, "ROLE_DRIVER") && (
-                  <NavDropdown title="Shift" id="appnavbar-shift-dropdown" data-testid="appnavbar-shift-dropdown" >
-                    <NavDropdown.Item as={Link} to="/shift/list">Driver shift table</NavDropdown.Item>
-                  </NavDropdown>
-                )
-              }
-              {
-                hasRole(currentUser, "ROLE_RIDER") && (
+                (
+                  hasRole(currentUser, "ROLE_ADMIN")
+                  || hasRole(currentUser, "ROLE_DRIVER")
+                  || hasRole(currentUser, "ROLE_RIDER")
+                ) && (
                   <NavDropdown title="Shift" id="appnavbar-shift-dropdown" data-testid="appnavbar-shift-dropdown" >
                     <NavDropdown.Item as={Link} to="/shift/list">Driver shift table</NavDropdown.Item>
                   </NavDropdown>

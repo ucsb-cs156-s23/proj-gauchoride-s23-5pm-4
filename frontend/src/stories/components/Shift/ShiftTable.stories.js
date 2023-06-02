@@ -5,7 +5,7 @@ import ShiftTable from "main/components/Shift/ShiftTable";
 import shiftFixtures from 'fixtures/shiftFixtures';
 
 export default {
-    title: 'components/Users/UsersTable',
+    title: 'components/Shift/ShiftTable',
     component: ShiftTable
 };
 

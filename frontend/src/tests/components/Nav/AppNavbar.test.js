@@ -118,6 +118,24 @@ describe("AppNavbar tests", () => {
         expect(shiftMenu).toBeInTheDocument();        
     });
 
+    test("not render shift table links for regular user", async () => {
+
+        const currentUser = currentUserFixtures.userOnly;
+        const doLogin = jest.fn();
+
+        const { getByText , getByTestId } = render(
+            <QueryClientProvider client={queryClient}>
+                <MemoryRouter>
+                    <AppNavbar currentUser={currentUser} doLogin={doLogin} />
+                </MemoryRouter>
+            </QueryClientProvider>
+        );
+        
+        await waitFor(() => expect(getByText("Welcome, pconrad.cis@gmail.com")).toBeInTheDocument());
+        const shiftMenu = screen.queryByTestId("appnavbar-shift-dropdown");
+        expect(shiftMenu).not.toBeInTheDocument();        
+    });
+
     // test taken from https://github.com/ucsb-cs156/proj-courses repo
     test("renders image correctly", async () => {
         const currentUser = currentUserFixtures.adminUser;
