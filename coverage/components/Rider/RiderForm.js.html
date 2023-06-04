@@ -259,14 +259,7 @@
 <a name='L194'></a><a href='#L194'>194</a>
 <a name='L195'></a><a href='#L195'>195</a>
 <a name='L196'></a><a href='#L196'>196</a>
-<a name='L197'></a><a href='#L197'>197</a>
-<a name='L198'></a><a href='#L198'>198</a>
-<a name='L199'></a><a href='#L199'>199</a>
-<a name='L200'></a><a href='#L200'>200</a>
-<a name='L201'></a><a href='#L201'>201</a>
-<a name='L202'></a><a href='#L202'>202</a>
-<a name='L203'></a><a href='#L203'>203</a>
-<a name='L204'></a><a href='#L204'>204</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L197'></a><a href='#L197'>197</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -274,28 +267,21 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -535,7 +521,6 @@ function RiderForm({ initialContents, submitAction, buttonLabel = "Create" }) {
                 &lt;/Form.Control.Feedback&gt;
             &lt;/Form.Group&gt;
 &nbsp;
-&nbsp;
             &lt;Form.Group className="mb-3" &gt;
                 &lt;Form.Label htmlFor="start"&gt;Start Time&lt;/Form.Label&gt;
                 &lt;Form.Control
@@ -551,7 +536,6 @@ function RiderForm({ initialContents, submitAction, buttonLabel = "Create" }) {
                           }
                     })}
                     placeholder="Enter time in the format HH:MM AM/PM (e.g. 3:30PM)"
-                    value={initialContents?.startTime}
                 /&gt;
                 &lt;Form.Control.Feedback type="invalid"&gt;
                     {errors.start?.message}
@@ -572,8 +556,7 @@ function RiderForm({ initialContents, submitAction, buttonLabel = "Create" }) {
                             message: "Please enter time in the format HH:MM AM/PM (e.g., 3:30PM)."
                           }
                     })}
-                    placeholder="Enter time in the format HH:MM AM/PM (e.g. 3:30PM)"  
-                    value={initialContents?.endTime}    
+                    placeholder="Enter time in the format HH:MM AM/PM (e.g. 3:30PM)"      
                 /&gt;
                 &lt;Form.Control.Feedback type="invalid"&gt;
                     {errors.end?.message}
@@ -590,8 +573,7 @@ function RiderForm({ initialContents, submitAction, buttonLabel = "Create" }) {
                     {...register("pickup", {
                         required: "Pick Up Location is required."
                     })}
-                    placeholder="e.g. Anacapa Residence Hall" 
-                    value={initialContents?.pickupLocation} 
+                    placeholder="e.g. Anacapa Residence Hall"  
                 /&gt;
                 &lt;Form.Control.Feedback type="invalid"&gt;
                     {errors.pickup?.message}
@@ -609,7 +591,6 @@ function RiderForm({ initialContents, submitAction, buttonLabel = "Create" }) {
                         required: "Drop Off Location is required."
                     })}
                     placeholder="e.g. Phelps"  
-                    value={initialContents?.dropoffLocation}
                 /&gt;
                 &lt;Form.Control.Feedback type="invalid"&gt;
                     {errors.dropoff?.message}
@@ -626,8 +607,7 @@ function RiderForm({ initialContents, submitAction, buttonLabel = "Create" }) {
                     {...register("room", {
                         required: "Room number is required."
                     })}
-                    placeholder="e.g. 2225" 
-                    value={initialContents?.room} 
+                    placeholder="e.g. 2225"  
                 /&gt;
                 &lt;Form.Control.Feedback type="invalid"&gt;
                     {errors.room?.message}
@@ -644,8 +624,7 @@ function RiderForm({ initialContents, submitAction, buttonLabel = "Create" }) {
                     {...register("course", {
                         required: "Course number is required."
                     })}
-                    placeholder="e.g. CMPSC 156" 
-                    value={initialContents?.course} 
+                    placeholder="e.g. CMPSC 156"  
                 /&gt;
                 &lt;Form.Control.Feedback type="invalid"&gt;
                     {errors.course?.message}
@@ -679,7 +658,7 @@ export default RiderForm;</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Fri Jun 02 2023 16:29:13 GMT-0700 (Pacific Daylight Time)
+                at Sat Jun 03 2023 20:02:25 GMT-0700 (Pacific Daylight Time)
             </div>
         <script src="../../prettify.js"></script>
         <script>
