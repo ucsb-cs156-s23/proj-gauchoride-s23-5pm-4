@@ -98,4 +98,28 @@ public class RideController extends ApiController {
 
         return savedRide;
     }
+
+    @ApiOperation(value = "Delete any ride")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @DeleteMapping("/admin")
+    public Object deleteRide(
+            @ApiParam("id") @RequestParam Long id) {
+        Ride ride = rideRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(Ride.class, id));
+
+        rideRepository.delete(ride);
+        return genericMessage("Ride with id %s deleted".formatted(id));
+    }
+
+    @ApiOperation(value = "Delete a ride, if it belongs to user")
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @DeleteMapping("")
+    public Object deleteRideForUser(
+            @ApiParam("id") @RequestParam Long id) {
+        Ride ride = rideRepository.findByIdAndRiderId(id, getCurrentUser().getUser().getId())
+                .orElseThrow(() -> new EntityNotFoundException(Ride.class, id));
+
+        rideRepository.delete(ride);
+        return genericMessage("Ride with id %s deleted".formatted(id));
+    }
 }
