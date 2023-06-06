@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RideController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">GauchoRide</a> &gt; <a href="index.source.html" class="el_package">edu.ucsb.cs156.gauchoride.controllers</a> &gt; <span class="el_source">RideController.java</span></div><h1>RideController.java</h1><pre class="source lang-java linenums">package edu.ucsb.cs156.gauchoride.controllers;
+
+import edu.ucsb.cs156.gauchoride.entities.Ride;
+import edu.ucsb.cs156.gauchoride.errors.EntityNotFoundException;
+import edu.ucsb.cs156.gauchoride.repositories.RideRepository;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.oauth2.jwt.NimbusReactiveJwtDecoder.SecretKeyReactiveJwtDecoderBuilder;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.Valid;
+
+
+@Api(description = &quot;Ride Request&quot;)
+@RequestMapping(&quot;/api/ride_request&quot;)
+@RestController
+
+<span class="fc" id="L30">public class RideController extends ApiController {</span>
+
+    @Autowired
+    RideRepository rideRepository;
+
+    @ApiOperation(value = &quot;List all rides, only users if not admin/driver&quot;)
+    @PreAuthorize(&quot;hasRole('ROLE_ADMIN') || hasRole('ROLE_DRIVER') || hasRole('ROLE_USER')&quot;)
+    @GetMapping(&quot;/all&quot;)
+    public Iterable&lt;Ride&gt; allRidesForUser() {
+        Iterable&lt;Ride&gt; rides;
+
+<span class="fc bfc" id="L41" title="All 2 branches covered.">        if (getCurrentUser().getRoles().contains(new SimpleGrantedAuthority(&quot;ROLE_ADMIN&quot;)) ||</span>
+<span class="fc bfc" id="L42" title="All 2 branches covered.">            getCurrentUser().getRoles().contains(new SimpleGrantedAuthority(&quot;ROLE_DRIVER&quot;))) {</span>
+<span class="fc" id="L43">            rides = rideRepository.findAll();</span>
+        } else {
+<span class="fc" id="L45">            rides = rideRepository.findAllByRiderId(getCurrentUser().getUser().getId());</span>
+        }
+
+<span class="fc" id="L48">        return rides;</span>
+    }
+
+    @ApiOperation(value = &quot;Get a single ride by id, only if users if not admin/driver&quot;)
+    @PreAuthorize(&quot;hasRole('ROLE_ADMIN') || hasRole('ROLE_DRIVER') || hasRole('ROLE_USER')&quot;)
+    @GetMapping(&quot;&quot;)
+    public Ride getByIdForUser(
+            @ApiParam(&quot;id&quot;) @RequestParam Long id) {
+        Ride ride;
+        
+<span class="fc bfc" id="L58" title="All 2 branches covered.">        if (getCurrentUser().getRoles().contains(new SimpleGrantedAuthority(&quot;ROLE_ADMIN&quot;)) ||</span>
+<span class="fc bfc" id="L59" title="All 2 branches covered.">            getCurrentUser().getRoles().contains(new SimpleGrantedAuthority(&quot;ROLE_DRIVER&quot;))) {</span>
+<span class="fc" id="L60">            ride = rideRepository.findById(id)</span>
+<span class="fc" id="L61">                .orElseThrow(() -&gt; new EntityNotFoundException(Ride.class, id));;</span>
+        } else {
+<span class="fc" id="L63">            ride = rideRepository.findByIdAndRiderId(id, getCurrentUser().getUser().getId())</span>
+<span class="fc" id="L64">                .orElseThrow(() -&gt; new EntityNotFoundException(Ride.class, id));</span>
+        }
+
+<span class="fc" id="L67">        return ride;</span>
+    }
+
+    @ApiOperation(value = &quot;Create a new ride&quot;)
+    @PreAuthorize(&quot;hasRole('ROLE_USER')&quot;)
+    @PostMapping(&quot;/post&quot;)
+    public Ride postRide(
+        @ApiParam(&quot;day&quot;) @RequestParam String day,
+        @ApiParam(&quot;startTime&quot;) @RequestParam String startTime,
+        @ApiParam(&quot;endTime&quot;) @RequestParam String endTime,
+        @ApiParam(&quot;pickupLocation&quot;) @RequestParam String pickupLocation,
+        @ApiParam(&quot;dropoffLocation&quot;) @RequestParam String dropoffLocation,
+        @ApiParam(&quot;room&quot;) @RequestParam String room,
+        @ApiParam(&quot;course&quot;) @RequestParam String course
+        )
+        {
+
+<span class="fc" id="L84">        Ride ride = new Ride();</span>
+        
+<span class="fc" id="L86">        ride.setRiderId(getCurrentUser().getUser().getId());</span>
+<span class="fc" id="L87">        ride.setDay(day);</span>
+<span class="fc" id="L88">        ride.setStartTime(startTime);</span>
+<span class="fc" id="L89">        ride.setEndTime(endTime);</span>
+<span class="fc" id="L90">        ride.setPickupLocation(pickupLocation);</span>
+<span class="fc" id="L91">        ride.setDropoffLocation(dropoffLocation);</span>
+<span class="fc" id="L92">        ride.setRoom(room);</span>
+<span class="fc" id="L93">        ride.setCourse(course);</span>
+
+<span class="fc" id="L95">        Ride savedRide = rideRepository.save(ride);</span>
+
+<span class="fc" id="L97">        return savedRide;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
