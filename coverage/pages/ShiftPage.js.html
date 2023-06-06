@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for pages/AdminUsersPage.js</title>
+    <title>Code coverage report for pages/ShiftPage.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../prettify.css" />
     <link rel="stylesheet" href="../base.css" />
@@ -19,7 +19,7 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../index.html">All files</a> / <a href="index.html">pages</a> AdminUsersPage.js</h1>
+        <h1><a href="../index.html">All files</a> / <a href="index.html">pages</a> ShiftPage.js</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
@@ -96,7 +96,7 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -104,7 +104,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -115,29 +115,29 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from "react";
 import BasicLayout from "main/layouts/BasicLayout/BasicLayout";
-import UsersTable from "main/components/Users/UsersTable"
+import ShiftTable from "main/components/Shift/ShiftTable"
 &nbsp;
 import { useBackend } from "main/utils/useBackend";
-const AdminUsersPage = () =&gt; {
+const ShiftPage = () =&gt; {
 &nbsp;
-    const { data: users, error: _error, status: _status } =
+    const { data: shift, error: _error, status: _status } =
         useBackend(
             // Stryker disable next-line all : don't test internal caching of React Query
-            ["/api/admin/users"],
+            ["/api/shift"],
             // Stryker disable next-line StringLiteral,ObjectLiteral : since "GET" is default, "" is an equivalent mutation
-            { method: "GET", url: "/api/admin/users" },
+            { method: "GET", url: "/api/shift" },
             []
         );
 &nbsp;
     return (
         &lt;BasicLayout&gt;
-            &lt;h2&gt;Users&lt;/h2&gt;
-            &lt;UsersTable users={users} /&gt;
+            &lt;h2&gt;Shift&lt;/h2&gt;
+            &lt;ShiftTable shift={shift} /&gt;
         &lt;/BasicLayout&gt;
     );
 };
 &nbsp;
-export default AdminUsersPage;
+export default ShiftPage;
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
