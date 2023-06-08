@@ -3,23 +3,26 @@ const shiftFixtures = {
         {
             "id": 1,
             "day": "Monday",
-            "shift": "8AM-11AM",
-            "driver": "Adam",
-            "driverBackup": "Eve"
+            "shiftStart": "8AM",
+            "shiftEnd": "11AM",
+            "driverID": 1,
+            "driverBackupID": 3
         },
         {
             "id": 2,
             "day": "Tuesday",
-            "shift": "11AM-2PM",
-            "driver": "Bob",
-            "driverBackup": "Adam"
+            "shiftStart": "11AM",
+            "shiftEnd": "2PM",
+            "driverID": 2,
+            "driverBackupID": 1
         },
         {
             "id": 3,
             "day": "Thursday",
-            "shift": "3PM-6PM",
-            "driver": "Eve",
-            "driverBackup": "Bob"
+            "shiftStart": "3PM",
+            "shiftEnd": "6PM",
+            "driverID": 3,
+            "driverBackupID": 2
         },
     ]
 }
