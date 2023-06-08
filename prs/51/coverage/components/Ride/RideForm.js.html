@@ -32,7 +32,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>5/5</span>
+                <span class='fraction'>3/3</span>
             </div>
         
             
@@ -259,7 +259,15 @@
 <a name='L194'></a><a href='#L194'>194</a>
 <a name='L195'></a><a href='#L195'>195</a>
 <a name='L196'></a><a href='#L196'>196</a>
-<a name='L197'></a><a href='#L197'>197</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L197'></a><a href='#L197'>197</a>
+<a name='L198'></a><a href='#L198'>198</a>
+<a name='L199'></a><a href='#L199'>199</a>
+<a name='L200'></a><a href='#L200'>200</a>
+<a name='L201'></a><a href='#L201'>201</a>
+<a name='L202'></a><a href='#L202'>202</a>
+<a name='L203'></a><a href='#L203'>203</a>
+<a name='L204'></a><a href='#L204'>204</a>
+<a name='L205'></a><a href='#L205'>205</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -267,21 +275,29 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">17x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">17x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">17x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">17x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -461,8 +477,8 @@ import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom';
 &nbsp;
 &nbsp;
-function RideForm({ initialContents, submitAction, buttonLabel = "Create" }) {
 &nbsp;
+function RideForm({ initialContents, submitAction, buttonLabel = "Create" }) {
     const navigate = useNavigate();
     
     // Stryker disable all
@@ -471,11 +487,12 @@ function RideForm({ initialContents, submitAction, buttonLabel = "Create" }) {
         formState: { errors },
         handleSubmit,
     } = useForm(
-        { defaultValues: initialContents || {}, }
+        { defaultValues: initialContents }
     );
     // Stryker enable all
    
     const testIdPrefix = "RideForm";
+&nbsp;
 &nbsp;
     return (
 &nbsp;
@@ -489,7 +506,7 @@ function RideForm({ initialContents, submitAction, buttonLabel = "Create" }) {
                         id="id"
                         type="text"
                         {...register("id")}
-                        value={initialContents.id}
+                        defaultValue={initialContents.id}
                         disabled
                     /&gt;
                 &lt;/Form.Group&gt;
@@ -536,6 +553,8 @@ function RideForm({ initialContents, submitAction, buttonLabel = "Create" }) {
                           }
                     })}
                     placeholder="Enter time in the format HH:MM AM/PM (e.g. 3:30PM)"
+                    defaultValue={initialContents?.startTime}
+&nbsp;
                 /&gt;
                 &lt;Form.Control.Feedback type="invalid"&gt;
                     {errors.start?.message}
@@ -556,7 +575,8 @@ function RideForm({ initialContents, submitAction, buttonLabel = "Create" }) {
                             message: "Please enter time in the format HH:MM AM/PM (e.g., 3:30PM)."
                           }
                     })}
-                    placeholder="Enter time in the format HH:MM AM/PM (e.g. 3:30PM)"      
+                    placeholder="Enter time in the format HH:MM AM/PM (e.g. 3:30PM)"   
+                    defaultValue={initialContents?.endTime}     
                 /&gt;
                 &lt;Form.Control.Feedback type="invalid"&gt;
                     {errors.end?.message}
@@ -574,6 +594,7 @@ function RideForm({ initialContents, submitAction, buttonLabel = "Create" }) {
                         required: "Pick Up Location is required."
                     })}
                     placeholder="e.g. Anacapa Residence Hall"  
+                    defaultValue={initialContents?.pickupLocation} 
                 /&gt;
                 &lt;Form.Control.Feedback type="invalid"&gt;
                     {errors.pickup?.message}
@@ -591,6 +612,7 @@ function RideForm({ initialContents, submitAction, buttonLabel = "Create" }) {
                         required: "Drop Off Location is required."
                     })}
                     placeholder="e.g. Phelps"  
+                    defaultValue={initialContents?.dropoffLocation}
                 /&gt;
                 &lt;Form.Control.Feedback type="invalid"&gt;
                     {errors.dropoff?.message}
@@ -608,6 +630,7 @@ function RideForm({ initialContents, submitAction, buttonLabel = "Create" }) {
                         required: "Room number is required."
                     })}
                     placeholder="e.g. 2225"  
+                    defaultValue={initialContents?.room} 
                 /&gt;
                 &lt;Form.Control.Feedback type="invalid"&gt;
                     {errors.room?.message}
@@ -625,6 +648,7 @@ function RideForm({ initialContents, submitAction, buttonLabel = "Create" }) {
                         required: "Course number is required."
                     })}
                     placeholder="e.g. CMPSC 156"  
+                    defaultValue={initialContents?.course} 
                 /&gt;
                 &lt;Form.Control.Feedback type="invalid"&gt;
                     {errors.course?.message}
@@ -658,7 +682,7 @@ export default RideForm;</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Tue Jun 06 2023 15:18:42 GMT-0700 (Pacific Daylight Time)
+                at Wed Jun 07 2023 20:14:01 GMT-0700 (Pacific Daylight Time)
             </div>
         <script src="../../prettify.js"></script>
         <script>

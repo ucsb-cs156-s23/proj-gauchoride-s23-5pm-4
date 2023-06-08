@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for components/Nav/Footer.js</title>
+    <title>Code coverage report for pages/Ride/RideRequestIndexPage.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -19,13 +19,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">components/Nav</a> Footer.js</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">pages/Ride</a> RideRequestIndexPage.js</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>3/3</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>3/3</span>
             </div>
         
             
@@ -86,19 +86,17 @@
 <a name='L21'></a><a href='#L21'>21</a>
 <a name='L22'></a><a href='#L22'>22</a>
 <a name='L23'></a><a href='#L23'>23</a>
-<a name='L24'></a><a href='#L24'>24</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">9x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">115x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L24'></a><a href='#L24'>24</a>
+<a name='L25'></a><a href='#L25'>25</a>
+<a name='L26'></a><a href='#L26'>26</a>
+<a name='L27'></a><a href='#L27'>27</a>
+<a name='L28'></a><a href='#L28'>28</a>
+<a name='L29'></a><a href='#L29'>29</a>
+<a name='L30'></a><a href='#L30'>30</a>
+<a name='L31'></a><a href='#L31'>31</a>
+<a name='L32'></a><a href='#L32'>32</a>
+<a name='L33'></a><a href='#L33'>33</a>
+<a name='L34'></a><a href='#L34'>34</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -109,29 +107,61 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Container } from "react-bootstrap";
+<span class="cline-any cline-yes">26x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">26x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">26x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from 'react';
+import { useBackend } from 'main/utils/useBackend';
 &nbsp;
-export const space = " ";
+import BasicLayout from "main/layouts/BasicLayout/BasicLayout";
+import RideTable from 'main/components/Ride/RideTable';
+import {useCurrentUser } from 'main/utils/currentUser'
+import Button from 'react-bootstrap/Button';
+import { Link } from 'react-router-dom';
 &nbsp;
-export default function Footer() {
-  return (
-    &lt;footer className="bg-light pt-3 pt-md-4 pb-4 pb-md-5"&gt;
-      &lt;Container&gt;
-        &lt;p&gt;
-          This is a sample webapp using React with a Spring Boot backend.
-        &lt;/p&gt;
-        &lt;p&gt;
-          The cartoon Storke Tower images in the brand logo and favicon for this site were
-          developed by Chelsea Lyon-Hayden, Art Director for UCSB Associate Students, and are
-          used here by permission of the Executive Director of UCSB Associated Students.
-          These images are Copyright © 2021 UCSB Associated Students, and may not be reused
-          without express written permission of the Executive Director of UCSB Associated Students.  For more info, visit:
-          { space }
-          &lt;a data-testid="footer-sticker-link" href="https://www.as.ucsb.edu/sticker-packs"&gt;www.as.ucsb.edu/sticker-packs/&lt;/a&gt;
-        &lt;/p&gt;
-      &lt;/Container&gt;
-    &lt;/footer&gt;
+export default function RideRequestIndexPage() {
+&nbsp;
+  const currentUser = useCurrentUser();
+&nbsp;
+  const { data: rides, error: _error, status: _status } =
+  useBackend(
+    // Stryker disable all : hard to test for query caching
+    ["/api/ride_request/all"],
+    { method: "GET", url: "/api/ride_request/all" },
+    []
+    // Stryker restore all 
   );
+&nbsp;
+  return (
+    &lt;BasicLayout&gt;
+      &lt;div className="pt-2"&gt;
+        &lt;Button style={{ float: "right" }} as={Link} to="/rideRequest/create"&gt;
+          Create Ride Request
+        &lt;/Button&gt;
+        &lt;h1&gt;Ride Requests&lt;/h1&gt;
+        &lt;RideTable ride={rides} currentUser={currentUser} /&gt;
+      &lt;/div&gt;
+    &lt;/BasicLayout&gt;
+  )
 }</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
