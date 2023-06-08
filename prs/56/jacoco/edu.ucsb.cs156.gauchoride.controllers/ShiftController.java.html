@@ -59,7 +59,7 @@ import io.swagger.annotations.ApiParam;
     }
 
     @ApiOperation(value = &quot;Create a new shift for the table&quot;)
-    @PreAuthorize(&quot;hasRole('ROLE_DRIVER')&quot;)
+    @PreAuthorize(&quot;hasRole('ROLE_ADMIN') || hasRole('ROLE_DRIVER')&quot;)
     @PostMapping(&quot;/post&quot;)
     public Shift postShift(
         @ApiParam(&quot;day&quot;) @RequestParam String day,
