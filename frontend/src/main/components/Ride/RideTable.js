@@ -52,19 +52,19 @@ export default function RideTable({
         },
         {
             Header: 'Start Time',
-            accessor: 'start',
+            accessor: 'startTime',
         },
         {
             Header: 'End Time',
-            accessor: 'end',
+            accessor: 'endTime',
         },
         {
             Header: 'Pick Up',
-            accessor: 'pickup',
+            accessor: 'pickupLocation',
         },
         {
             Header: 'Drop Off',
-            accessor: 'dropoff',
+            accessor: 'dropoffLocation',
         },
         {
             Header: 'Room #',
@@ -91,19 +91,19 @@ export default function RideTable({
         },
         {
             Header: 'Start Time',
-            accessor: 'start',
+            accessor: 'startTime',
         },
         {
             Header: 'End Time',
-            accessor: 'end',
+            accessor: 'endTime',
         },
         {
             Header: 'Pick Up',
-            accessor: 'pickup',
+            accessor: 'pickupLocation',
         },
         {
             Header: 'Drop Off',
-            accessor: 'dropoff',
+            accessor: 'dropoffLocation',
         },
         {
             Header: 'Room #',
@@ -130,19 +130,19 @@ export default function RideTable({
         },
         {
             Header: 'Start Time',
-            accessor: 'start',
+            accessor: 'startTime',
         },
         {
             Header: 'End Time',
-            accessor: 'end',
+            accessor: 'endTime',
         },
         {
             Header: 'Pick Up',
-            accessor: 'pickup',
+            accessor: 'pickupLocation',
         },
         {
             Header: 'Drop Off',
-            accessor: 'dropoff',
+            accessor: 'dropoffLocation',
         },
         {
             Header: 'Room #',
