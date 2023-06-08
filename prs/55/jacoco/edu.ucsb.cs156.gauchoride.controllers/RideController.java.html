@@ -141,7 +141,7 @@ import javax.validation.Valid;
     @PreAuthorize(&quot;hasRole('ROLE_ADMIN') || hasRole('ROLE_DRIVER') || hasRole('ROLE_USER')&quot;)
     @PutMapping(&quot;&quot;)
     public Ride updateRide(
-            @ApiParam(name=&quot;id&quot;, type=&quot;long&quot;, value = &quot;Id of the Ride to be deleted&quot;, 
+            @ApiParam(name=&quot;id&quot;, type=&quot;long&quot;, value = &quot;Id of the Ride to be edited&quot;, 
             required = true)
             @RequestParam Long id,
             @RequestBody @Valid Ride incoming) {
