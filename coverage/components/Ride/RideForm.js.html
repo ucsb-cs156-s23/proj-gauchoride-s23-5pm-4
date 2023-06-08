@@ -32,7 +32,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>5/5</span>
+                <span class='fraction'>3/3</span>
             </div>
         
             
@@ -264,28 +264,34 @@
 <a name='L199'></a><a href='#L199'>199</a>
 <a name='L200'></a><a href='#L200'>200</a>
 <a name='L201'></a><a href='#L201'>201</a>
-<a name='L202'></a><a href='#L202'>202</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L202'></a><a href='#L202'>202</a>
+<a name='L203'></a><a href='#L203'>203</a>
+<a name='L204'></a><a href='#L204'>204</a>
+<a name='L205'></a><a href='#L205'>205</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">17x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">17x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">17x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">17x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -471,6 +477,7 @@ import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom';
 &nbsp;
 &nbsp;
+&nbsp;
 function RideForm({ initialContents, submitAction, buttonLabel = "Create" }) {
     const navigate = useNavigate();
     
@@ -480,11 +487,12 @@ function RideForm({ initialContents, submitAction, buttonLabel = "Create" }) {
         formState: { errors },
         handleSubmit,
     } = useForm(
-        { defaultValues: initialContents || {}, }
+        { defaultValues: initialContents }
     );
     // Stryker enable all
    
     const testIdPrefix = "RideForm";
+&nbsp;
 &nbsp;
     return (
 &nbsp;
@@ -498,7 +506,7 @@ function RideForm({ initialContents, submitAction, buttonLabel = "Create" }) {
                         id="id"
                         type="text"
                         {...register("id")}
-                        value={initialContents.id}
+                        defaultValue={initialContents.id}
                         disabled
                     /&gt;
                 &lt;/Form.Group&gt;
@@ -545,7 +553,8 @@ function RideForm({ initialContents, submitAction, buttonLabel = "Create" }) {
                           }
                     })}
                     placeholder="Enter time in the format HH:MM AM/PM (e.g. 3:30PM)"
-                    value={initialContents?.startTime}
+                    defaultValue={initialContents?.startTime}
+&nbsp;
                 /&gt;
                 &lt;Form.Control.Feedback type="invalid"&gt;
                     {errors.start?.message}
@@ -567,7 +576,7 @@ function RideForm({ initialContents, submitAction, buttonLabel = "Create" }) {
                           }
                     })}
                     placeholder="Enter time in the format HH:MM AM/PM (e.g. 3:30PM)"   
-                    value={initialContents?.endTime}    
+                    defaultValue={initialContents?.endTime}     
                 /&gt;
                 &lt;Form.Control.Feedback type="invalid"&gt;
                     {errors.end?.message}
@@ -585,7 +594,7 @@ function RideForm({ initialContents, submitAction, buttonLabel = "Create" }) {
                         required: "Pick Up Location is required."
                     })}
                     placeholder="e.g. Anacapa Residence Hall"  
-                    value={initialContents?.pickupLocation}
+                    defaultValue={initialContents?.pickupLocation} 
                 /&gt;
                 &lt;Form.Control.Feedback type="invalid"&gt;
                     {errors.pickup?.message}
@@ -603,7 +612,7 @@ function RideForm({ initialContents, submitAction, buttonLabel = "Create" }) {
                         required: "Drop Off Location is required."
                     })}
                     placeholder="e.g. Phelps"  
-                    value={initialContents?.dropoffLocation}
+                    defaultValue={initialContents?.dropoffLocation}
                 /&gt;
                 &lt;Form.Control.Feedback type="invalid"&gt;
                     {errors.dropoff?.message}
@@ -621,7 +630,7 @@ function RideForm({ initialContents, submitAction, buttonLabel = "Create" }) {
                         required: "Room number is required."
                     })}
                     placeholder="e.g. 2225"  
-                    value={initialContents?.room} 
+                    defaultValue={initialContents?.room} 
                 /&gt;
                 &lt;Form.Control.Feedback type="invalid"&gt;
                     {errors.room?.message}
@@ -639,7 +648,7 @@ function RideForm({ initialContents, submitAction, buttonLabel = "Create" }) {
                         required: "Course number is required."
                     })}
                     placeholder="e.g. CMPSC 156"  
-                    value={initialContents?.course} 
+                    defaultValue={initialContents?.course} 
                 /&gt;
                 &lt;Form.Control.Feedback type="invalid"&gt;
                     {errors.course?.message}
@@ -673,7 +682,7 @@ export default RideForm;</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Wed Jun 07 2023 17:22:52 GMT-0700 (Pacific Daylight Time)
+                at Wed Jun 07 2023 17:57:34 GMT-0700 (Pacific Daylight Time)
             </div>
         <script src="../../prettify.js"></script>
         <script>
